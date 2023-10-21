@@ -84,17 +84,35 @@ return {
     },
 
     -- hop
-    ["f"] = {
+    ["<leader>f"] = {
       function() require("hop").hint_words {} end,
       desc = "Hop to next character",
     },
-    ["F"] = {
+    ["<leader>F"] = {
       function() require("hop").hint_char2() end,
       desc = "Hop to next character",
     },
     ["X"] = {
       function() require("hop").hint_patterns {} end,
       desc = "Hop to next character",
+    },
+
+    -- projects
+    ["<leader>ppv"] = {
+      "<cmd>cd /Users/bdan/.config/nvim/lua/user<cr>",
+      desc = "nvim",
+    },
+    ["<leader>ppa"] = {
+      "<cmd>cd /Users/bdan/Projects/template-9am/app<cr>",
+      desc = "FEWEB",
+    },
+    ["<leader>ppp"] = {
+      "<cmd>cd /Users/bdan/Projects/patientmanagement/app<cr>",
+      desc = "PMP",
+    },
+    ["<leader>ppw"] = {
+      "<cmd>cd /Users/bdan/Projects/web-2<cr>",
+      desc = "PMP",
     },
 
     -- redo

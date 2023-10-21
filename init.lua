@@ -73,6 +73,9 @@ return {
     -- set clipboard to null
     -- vim.opt.clipboard = ""
 
+    vim.g.neovide_cursor_vfx_mode = "pixiedust"
+    vim.g.neovide_cursor_vfx_mode = "sonicboom"
+
     -- Set up custom filetypes
     -- vim.filetype.add {
     --   extension = {
