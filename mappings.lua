@@ -84,15 +84,15 @@ return {
     },
 
     -- hop
-    ["<leader>f"] = {
+    ["<C-f>"] = {
       function() require("hop").hint_words {} end,
       desc = "Hop to next character",
     },
-    ["<leader>F"] = {
+    ["<C-g>"] = {
       function() require("hop").hint_char2() end,
       desc = "Hop to next character",
     },
-    ["X"] = {
+    ["<C-x>"] = {
       function() require("hop").hint_patterns {} end,
       desc = "Hop to next character",
     },
