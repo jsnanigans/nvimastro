@@ -73,13 +73,6 @@ return {
     -- set clipboard to null
     -- vim.opt.clipboard = ""
 
-    vim.g.neovide_fullscreen = true
-
-    vim.g.neovide_cursor_animation_length = 0.09
-    vim.g.neovide_cursor_trail_size = 0.09
-    vim.g.neovide_cursor_vfx_mode = "pixiedust"
-    -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
-
     -- Set up custom filetypes
     -- vim.filetype.add {
     --   extension = {
@@ -92,11 +85,18 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+
+    -- bufferline disable tabs on top
+    -- vim.opt.showtabline = 1
+
+    -- :set scrolloff=20
+    vim.opt.scrolloff = 20
+
     require("telescope").setup {
       defaults = {
         -- ignore node_modules, .git, and build directories
         file_ignore_patterns = {
-          "node_modules",
+          -- "node_modules",
           ".git",
           "build",
           "dist",

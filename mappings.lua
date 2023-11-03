@@ -50,23 +50,37 @@ return {
     ["<C-a>"] = { "ggVG", desc = "Select all" },
 
     -- tests
-    ["<leader>tt"] = { function() require("neotest").run.run(vim.fn.expand "%") end, desc = "Run File" },
-    ["<leader>tT"] = { function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
-    ["<leader>tr"] = { function() require("neotest").run.run() end, desc = "Run Nearest" },
+    ["<leader>tt"] = {
+      function()
+        require("neotest").summary.open()
+        require("neotest").run.run(vim.fn.expand "%")
+      end,
+      desc = "Run File",
+    },
+    ["<leader>tT"] = {
+      function()
+        require("neotest").summary.open()
+        require("neotest").run.run(vim.loop.cwd())
+      end,
+      desc = "Run All Test Files",
+    },
+    ["<leader>tr"] = {
+      function()
+        require("neotest").summary.open()
+        require("neotest").run.run()
+      end,
+      desc = "Run Nearest",
+    },
     ["<leader>ts"] = { function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
     ["<leader>to"] = {
-      function() require("neotest").output.open { enter = true, auto_close = true } end,
+      function() require("neotest").output.open() end,
       desc = "Show Output",
     },
     ["<leader>tO"] = { function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
     ["<leader>tS"] = { function() require("neotest").run.stop() end, desc = "Stop" },
-    ["<leader>tw"] = {
-      function()
-        -- require("neotest").watch.toggle()
-        require("neotest").watch.watch(vim.fn.expand "%")
-      end,
-      desc = "Watch Nearest Test",
-    },
+
+    -- copilot panel
+    ["<leader>vcp"] = { function() require("copilot.panel").open {} end, desc = "Open Copilot" },
 
     -- org imports
     ["<leader>oi"] = {
@@ -97,22 +111,30 @@ return {
       desc = "Hop to next character",
     },
 
+    -- lsp hover: vim.lsp.buf.hover()
+    ["<C-k>"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "LSP Info Hover" },
+
     -- projects
     ["<leader>ppv"] = {
       "<cmd>cd /Users/bdan/.config/nvim/lua/user<cr>",
       desc = "nvim",
     },
-    ["<leader>ppa"] = {
-      "<cmd>cd /Users/bdan/Projects/template-9am/app<cr>",
-      desc = "FEWEB",
+    -- :Telescope neovim-project discover - find a project based on patterns.
+    ["<leader>ppd"] = {
+      "<cmd>Telescope neovim-project discover<cr>",
+      desc = "Discover projects",
     },
-    ["<leader>ppp"] = {
-      "<cmd>cd /Users/bdan/Projects/patientmanagement/app<cr>",
-      desc = "PMP",
+
+    -- :Telescope neovim-project history - select a project from your recent history.
+    ["<leader>pph"] = {
+      "<cmd>Telescope neovim-project history<cr>",
+      desc = "History",
     },
-    ["<leader>ppw"] = {
-      "<cmd>cd /Users/bdan/Projects/web-2<cr>",
-      desc = "PMP",
+
+    -- :NeovimProjectLoadRecent - open the previous session.
+    ["<leader>ppr"] = {
+      "<cmd>NeovimProjectLoadRecent<cr>",
+      desc = "Load recent",
     },
 
     -- redo

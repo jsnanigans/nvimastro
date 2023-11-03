@@ -10,16 +10,17 @@ return {
   --     require("lsp_signature").setup()
   --   end,
   -- },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function() require("todo-comments").setup {} end,
-    event = "User Astrofile",
-    cmd = { "TodoQuickFix" },
-    keys = {
-      { "<leader>T", "<cmd>TodoTelescope<cr>", desc = "Open TODOs with Telescope" },
-    },
-  },
+  -- {
+  --   "folke/todo-comments.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function() require("todo-comments").setup {} end,
+  --   event = "User Astrofile",
+  --   cmd = { "TodoQuickFix" },
+  --   keys = {
+  --     { "<leader>T", "<cmd>TodoTelescope<cr>", desc = "Open TODOs with Telescope" },
+  --   },
+  -- },
+  { "junegunn/fzf", build = "./install --bin", lazy = false },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
@@ -29,8 +30,7 @@ return {
       require("fzf-lua").setup {}
     end,
   },
-  { "junegunn/fzf", build = "./install --bin", lazy = false },
-  { "nvim-lua/plenary.nvim" },
+  -- { "nvim-lua/plenary.nvim" },
   { "haydenmeade/neotest-jest" },
   { "nvim-treesitter/nvim-treesitter" },
   { "antoinemadec/FixCursorHold.nvim" },
@@ -50,8 +50,12 @@ return {
           require "neotest-jest" {
             jestCommand = "npm test --",
             -- jestConfigFile = "custom.jest.config.ts",
-            env = { CI = true },
-            cwd = function(path) return vim.fn.getcwd() end,
+            -- env = { CI = true },
+            -- cwd = function(path) return vim.fn.getcwd() end,
+            cwd = function()
+              -- only run tests in the 'src' directory
+              return vim.fn.getcwd() .. "/src"
+            end,
           },
         },
       }
@@ -66,7 +70,7 @@ return {
       transparent = true,
       styles = {
         sidebars = "transparent",
-        floats = "transparent",
+        -- floats = "transparent",
       },
     },
     config = function(_, opts)
@@ -84,5 +88,76 @@ return {
     version = "v2",
     config = function() require("hop").setup {} end,
     lazy = false,
+  },
+
+  {
+    "coffebar/neovim-project",
+    opts = {
+      projects = { -- define project roots
+        "/Users/bdan/Projects/web-2",
+        "/Users/bdan/Projects/template-9am/app",
+        "/Users/bdan/Projects/patientmanagement/app",
+        "/Users/bdan/rad/honestweb-works/*",
+      },
+    },
+    init = function()
+      -- enable saving the state of plugins in the session
+      vim.opt.sessionoptions:append "globals" -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup {
+        -- panel = {
+        --   enabled = true,
+        --   auto_refresh = false,
+        --   keymap = {
+        --     jump_prev = "[[",
+        --     jump_next = "]]",
+        --     accept = "<CR>",
+        --     refresh = "gr",
+        --     open = "<leader-tgo>",
+        --   },
+        --   layout = {
+        --     position = "bottom", -- | top | left | right
+        --     ratio = 0.4,
+        --   },
+        -- },
+        suggestion = {
+          auto_trigger = true,
+          enabled = true,
+          debounce = 75,
+          keymap = {
+            accept = "<Tab>",
+            accept_word = false,
+            accept_line = false,
+            next = "<C-j>",
+            prev = "<C-k>",
+            dismiss = "C-h>",
+          },
+          --
+        },
+        filetypes = {
+          ["*"] = true,
+          sh = function()
+            if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+              -- disable for .env files
+              return false
+            end
+            return true
+          end,
+        },
+      }
+    end,
   },
 }

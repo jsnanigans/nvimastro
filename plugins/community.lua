@@ -5,14 +5,12 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
 
   -- { import = "astrocommunity.colorscheme.catppuccin" },
-  { import = "astrocommunity.completion.copilot-lua-cmp" },
-  { import = "astrocommunity.pack.json" },
+  -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.html-css" },
-  { import = "astrocommunity.pack.wgsl" },
-  { import = "astrocommunity.pack.yaml" },
+  -- { import = "astrocommunity.pack.wgsl" },
+  -- { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.bars-and-lines.vim-illuminate" },
-  { import = "astrocommunity.fuzzy-finder.telescope-zoxide" },
-  -- { import = "astrocommunity.test.neotest" },
+  -- { import = "astrocommunity.fuzzy-finder.telescope-zoxide" },
 }
